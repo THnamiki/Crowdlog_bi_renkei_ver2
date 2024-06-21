@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  app:
+    build: .
+    # command: >
+    #   sh -c "pnpm i &&\
+    #   ash"
+    volumes:
+      - type: bind
+        source: .
+        target: /backend
+      - pnpm_store_backend:/backend/.pnpm-store
+    working_dir: /backend
+    ports:
+      - 8880:8080
+      - 3306:3306
+    tty: true
+volumes:
+  pnpm_store_backend:
